@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>AR Toy Shop</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+  <!-- We import arjs version without NFT but with marker + location based support -->
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+  <!-- SweetAlert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <!-- Local StyleSheet -->
+  <link href="./style.css" rel="stylesheet" />
+
+  <!--JS Files-->
+  <script src="./js/markerHandler.js"></script>
+  <script src="./js/addButtons.js"></script>
+
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+  <a-scene vr-mode-ui="enabled: false"
+    embedded
+    arjs="sourceType: webcam; 
+    sourceWidth:1280; sourceHeight:960; 
+    displayWidth: 1280; displayHeight: 960; 
+    debugUIEnabled: false;"
+    gesture-detector create-buttons>
+
+    <!-- Camera -->
+    <a-entity camera></a-entity>
+
+    <a-assets>
+      <a-asset-item id="toy-model" src="./assets/mobile_crane_ii_wooden_toy/scene.gltf"></a-asset-item>
+    </a-assets>
+
+    <!--Pattern Marker-->
+    <a-marker id="toy-marker" type="pattern" url="assets/Toy1/pattern-crane.patt" cursor="rayOrigin: mouse"
+      markerhandler>
+
+      <!-- toy Model -->
+      <a-entity id="toy-3D-model" position="-2 1 0.1" scale="0.05 0.05 0.05" gltf-model="#toy-model"
+        gesture-handler>
+      </a-entity>
+
+      <!-- Ingredients -->
+       <a-plane position="0 0 0" width="2.5" height="1.5" rotation="-90 0 0">
+         <a-plane position="0 0.89 0.02" width="2.49" height="0.3" rotation="0 0 0" color="#F0C30F">
+          <a-entity position="0 0 0.1" rotation="0 0 0"
+            text="font:monoid;value:Toy Crane;color:black;width: 1.8;height:1;align:center;"></a-entity>
+        </a-plane>
+
+        <a-entity position="0 0 0.1" rotation="0 0 0"
+          text="color: black; align: center; width: 2; font: monoid;
+               value: Equipped with a remote control\n\nProvides full control over its movements\n\nCan be easily
+               maneuvered, lifting and lowering the heavy metal hook with precision and ease.">
+        </a-entity>
+      </a-plane>
+
+    </a-marker>
+  </a-scene>
+
+  <div id="button-div"></div>
+
+</body>
+
+</html>
